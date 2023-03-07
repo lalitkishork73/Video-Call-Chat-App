@@ -1,9 +1,9 @@
 import React, { createContext, useMemo, useContext } from 'react';
-import { io } from 'socket.io-client';
+import io, { ManagerOptions, SocketOptions,Socket  } from 'socket.io-client';
 
 const SocketContext = createContext(null);
 interface SocketProviderProps {
-    children: React.ReactNode;
+    children: any;
 }
 
 const AppCtx = createContext<SocketProviderProps | null>(null);
@@ -13,6 +13,6 @@ export const SocketProvider = ({ children }) => {
     return <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>;
 };
 
-export const useSocket = () => {
+export const useSocket = (uri: string, opts?: Partial<ManagerOptions & SocketOptions> | undefined) => {
     return useContext(SocketProvider);
 };
